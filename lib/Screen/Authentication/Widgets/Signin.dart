@@ -1,45 +1,43 @@
-import 'package:ecommerce_mobile/Screen/Authentication/Widgets/Signin.dart';
+import 'package:ecommerce_mobile/Screen/Authentication/Widgets/SignUp.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:sizer/sizer.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class Signin_Screen extends StatefulWidget {
+  const Signin_Screen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<Signin_Screen> createState() => _SigninScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SigninScreenState extends State<Signin_Screen> {
   @override
   Widget build(BuildContext context) {
-    return 
-    Scaffold(
+    return Scaffold(
       body: Column(
-       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+       
+      
         children: [
-         SizedBox(height: 9.h,),
+          SizedBox(height:15.h,),
            Align(
             alignment: Alignment.center,
              child: Container(
-              
-                height: 10.h,
-                width: 50.w,
+              height: 10.h,
+                width: 50.h,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
-                    Text("Create Account",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color:Color(0xff1f2029) ),),
-                    Text("Fill your information below",style: TextStyle(fontSize: 15,color:Color(0xff797979), ),textAlign: TextAlign.center,),
+                    Text("Sign In",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color:Color(0xff1f2029) ),),
+                   SizedBox(height: 2.h,),
+                    Text("Hi! Welcome back,you've been missed",style: TextStyle(fontSize: 15,color:Color(0xff797979), ),textAlign: TextAlign.center,),
                   ],
                 ),
               ),
            ),
-          SizedBox(height:0.5.h),
+            SizedBox(height:3.h),
           
           Padding(
-            padding: EdgeInsets.only(left: 5.w),
+            padding: EdgeInsets.only(left: 3.w),
             child: 
             Column(
               
@@ -47,24 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
               
                  SizedBox(height: 1.h,),
-                Text("Name",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w600,color: Color(0xff1f2029)),textAlign: TextAlign.start,),
-                SizedBox(height: 1.h,),
-              Container(
-               margin: EdgeInsets.only(left: 0.5.w),
-                height: 5.h,
-                width: 88.w,
-                child: TextFormField(
-                  
-                  keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: ("John Doe"),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20),borderSide: BorderSide(color:Color(0xff797979)),
-                            ),
-                          ),
-                  
-                ),
-              ),
-              SizedBox(height: 2.5.h,),
+                
               Text("Email",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w600,color: Color(0xff1f2029)),textAlign: TextAlign.start,),
                 SizedBox(height: 1.h,),
               Container(
@@ -100,49 +81,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   
                 ),
               ),
-              SizedBox(height: 3.5.h,),
-               Container( 
-                        alignment: Alignment.center,
-                        child:
-                            Row(
-                              children: [
-                                
-                                Icon(Icons.check_box,size: 5.w,color: Color(0xff704f38) ,),
-                                Text(" Agree with Terms and Conditions",style: TextStyle(fontSize: 13,color:Color(0xff1f2029)),),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 3.h,),
+            
+        ],
+      ),
+      
+    ),
+    SizedBox(height: 1.h,),
+      Padding(
+        padding: EdgeInsets.only(right: 3.7.w),
+        child: Align(
+                  alignment: Alignment.topRight,
+                  child: Text("Forgot Password?",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w600,color: Color(0xff1f2029)),),
+      
+                ),
+      ),
+         SizedBox(height: 3.h,),
                           Container(
                                 width: 88.w,
-                               height: 5.h,
+                               height: 5.8.h,
                                     margin: EdgeInsets.only(left: 0.5.w),               
                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.w),color:Color(0xff704f38) ),
                                alignment: Alignment.center,
-                               child: Text("Sign up",style: TextStyle(fontWeight: FontWeight.w500,color: Color(0xffEDEDED)),),
+                               child: Text("Sign In",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: Color(0xffEDEDED)),),
                               ),
                             
                           
                           SizedBox(height: 2.h,),
-                          
-              ],
-              
-            ),
-            
-          ),
-          Expanded(child: Container()),
+                            Expanded(child: Container()),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("already have an account?",style: TextStyle(fontSize: 15,color: Color(0xff1f2029)),),
+                              Text("Don't have an account?",style: TextStyle(fontSize: 15,color: Color(0xff1f2029)),),
                            InkWell(
-                            onTap: () => Navigator.push(context,MaterialPageRoute(builder: (context)=> Signin_Screen())),
-                            child: Text("Sign in",style: TextStyle(fontSize: 15,color: Color(0xff704f38)),))
+                             onTap: () => Navigator.push(context,MaterialPageRoute(builder: (context)=> SignUpScreen())),
+                            child: Text("Sign Up",style: TextStyle(fontSize: 15,color: Color(0xff704f38)),))
                             ],
                           ),
                           SizedBox(height: 12.h,)
+                          
+
         ],
-      ),
-    );
+      ),);
   }
 }
