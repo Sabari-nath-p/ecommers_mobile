@@ -1,6 +1,8 @@
 import 'package:ecommerce_mobile/Screen/Authentication/Widgets/SignUp.dart';
 import 'package:ecommerce_mobile/Screen/Authentication/Widgets/Signin.dart';
 import 'package:ecommerce_mobile/Screen/HomeScreen/HomeScreenMain.dart';
+import 'package:ecommerce_mobile/temp/Orderpage.dart';
+
 import 'package:ecommerce_mobile/temp/Verification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
-          home: VerifyScreen(),
+          home: OrderSucess(),
         );
       },
     );
