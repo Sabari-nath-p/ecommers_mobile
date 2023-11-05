@@ -67,7 +67,7 @@ class _CartScreenState extends State<CartScreen> {
                                 
                             
                            
-                             Text("Price",style: TextStyle(fontSize: 4.w,fontWeight: FontWeight.w400,color:Color(0xff1f2029) ),textAlign: TextAlign.start,)
+                             Text("Price",style: TextStyle(fontSize: 4.w,fontWeight: FontWeight.w600,color:Color(0xff1f2029) ),textAlign: TextAlign.start,)
                            
                            
                             ],
