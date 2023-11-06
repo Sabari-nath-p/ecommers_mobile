@@ -38,6 +38,13 @@ dependencies:
   get: ^4.6.5
   sizer: ^2.0.15
   google_fonts: ^6.1.0
+  http: ^1.1.0
+  fluttertoast: ^8.2.2
+  shared_preferences: ^2.2.2
+  loading_animation_widget: ^1.2.0+4
+  icons_plus: ^4.0.0
+  flutter_carousel_widget: ^2.1.2
+  dio: ^5.3.3
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +69,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

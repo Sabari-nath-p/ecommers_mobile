@@ -1,8 +1,11 @@
 import 'package:ecommerce_mobile/Screen/Authentication/Widgets/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../Constants/Colors.dart';
 import '../Service/controller.dart';
 
 class Signin_Screen extends StatefulWidget {
@@ -19,32 +22,36 @@ class _SigninScreenState extends State<Signin_Screen> {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 15.h,
+            height: 9.h,
           ),
+          SizedBox(
+              height: 150,
+              width: 150,
+              child: Image.asset(("assets/images/logo.png"))),
           Align(
             alignment: Alignment.center,
             child: Container(
-              height: 10.h,
-              width: 50.h,
+              height: 8.h,
               alignment: Alignment.center,
               child: Column(
                 children: [
                   Text(
                     "Sign In",
-                    style: TextStyle(
+                    style: GoogleFonts.lato(
                         fontSize: 25,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xff1f2029)),
                   ),
                   SizedBox(
-                    height: 2.h,
+                    height: 10,
                   ),
                   Text(
-                    "Hi! Welcome back,you've been missed",
-                    style: TextStyle(
-                      fontSize: 15,
+                    "Hi welcome back you have been missed",
+                    style: GoogleFonts.lato(
+                      fontSize: 13,
                       color: Color(0xff797979),
                     ),
                     textAlign: TextAlign.center,
@@ -53,36 +60,35 @@ class _SigninScreenState extends State<Signin_Screen> {
               ),
             ),
           ),
-          SizedBox(height: 3.h),
           Padding(
-            padding: EdgeInsets.only(left: 3.w),
+            padding: EdgeInsets.only(left: 6.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 1.h,
-                ),
-                Text(
-                  "Email",
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff1f2029)),
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(
-                  height: 1.h,
+                  height: 2.5.h,
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 0.5.w),
-                  height: 5.h,
+                  height: 5.5.h,
                   width: 88.w,
                   child: TextFormField(
+                    controller: authCtrl.emailText,
                     keyboardType: TextInputType.emailAddress,
+                    style: GoogleFonts.lato(
+                        fontSize: 15, fontWeight: FontWeight.w500),
                     decoration: InputDecoration(
-                      labelText: ("example@gmail.com"),
+                      labelText: ("Email Id"),
+                      labelStyle: GoogleFonts.lato(
+                          fontSize: 14, fontWeight: FontWeight.w500),
+                      prefixIcon: Icon(Icons.email),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Color(0xff797979)),
+                      ),
+                      focusColor: PrimaryColor,
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide(color: Color(0xff797979)),
                       ),
                     ),
@@ -91,79 +97,103 @@ class _SigninScreenState extends State<Signin_Screen> {
                 SizedBox(
                   height: 2.5.h,
                 ),
-                Text(
-                  "Password",
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff1f2029)),
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
                 Container(
                   margin: EdgeInsets.only(left: 0.5.w),
-                  height: 5.h,
+                  height: 5.5.h,
                   width: 88.w,
                   child: TextFormField(
+                    controller: authCtrl.passowrdText,
                     keyboardType: TextInputType.emailAddress,
+                    obscureText: !authCtrl.passVisible,
+                    style: GoogleFonts.lato(
+                        fontSize: 15, fontWeight: FontWeight.w500),
                     decoration: InputDecoration(
-                      labelText: ("*********"),
-                      suffixIcon: Icon(Icons.remove_red_eye_rounded),
+                      labelText: ("Password"),
+                      labelStyle: GoogleFonts.lato(
+                          fontSize: 14, fontWeight: FontWeight.w500),
+                      prefixIcon: Icon(Icons.password),
+                      suffixIcon: authCtrl.passVisible
+                          ? InkWell(
+                              onTap: () {
+                                authCtrl.passVisible = !authCtrl.passVisible;
+                                authCtrl.update();
+                              },
+                              child: Icon(Icons.visibility))
+                          : InkWell(
+                              onTap: () {
+                                authCtrl.passVisible = !authCtrl.passVisible;
+                                authCtrl.update();
+                              },
+                              child: Icon(Icons.visibility_off)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Color(0xff797979)),
+                      ),
+                      focusColor: PrimaryColor,
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Color(0xff797979))),
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Color(0xff797979)),
+                      ),
                     ),
                   ),
                 ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      Checkbox(
+                          value: authCtrl.acceptPrivacy,
+                          onChanged: (value) {
+                            authCtrl.acceptPrivacy = value!;
+
+                            authCtrl.update();
+                          }),
+                      Text(
+                        " Agree with Terms and Conditions",
+                        style: GoogleFonts.lato(
+                            fontSize: 13, color: Color(0xff1f2029)),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                InkWell(
+                  onTap: () {
+                    authCtrl.Login();
+                  },
+                  child: Container(
+                    width: 88.w,
+                    height: 5.h,
+                    margin: EdgeInsets.only(left: 0.5.w),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PrimaryColor),
+                    alignment: Alignment.center,
+                    child: (authCtrl.isLoading)
+                        ? LoadingAnimationWidget.staggeredDotsWave(
+                            color: Colors.white, size: 23)
+                        : Text(
+                            "Sign In",
+                            style: GoogleFonts.lato(
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xffEDEDED)),
+                          ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 1.h,
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 3.7.w),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Text(
-                "Forgot Password?",
-                style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff1f2029)),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 3.h,
-          ),
-          Container(
-            width: 88.w,
-            height: 5.8.h,
-            margin: EdgeInsets.only(left: 0.5.w),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.w),
-                color: Color(0xff704f38)),
-            alignment: Alignment.center,
-            child: Text(
-              "Sign In",
-              style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xffEDEDED)),
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don't have an account?",
-                style: TextStyle(fontSize: 15, color: Color(0xff1f2029)),
+                "don't have an account? ",
+                style: GoogleFonts.lato(fontSize: 15, color: Color(0xff1f2029)),
               ),
               InkWell(
                   onTap: () {
@@ -172,7 +202,10 @@ class _SigninScreenState extends State<Signin_Screen> {
                   },
                   child: Text(
                     "Sign Up",
-                    style: TextStyle(fontSize: 15, color: Color(0xff704f38)),
+                    style: GoogleFonts.lato(
+                        fontSize: 15,
+                        color: PrimaryColor,
+                        fontWeight: FontWeight.bold),
                   ))
             ],
           ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -26,6 +27,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           SizedBox(
             height: 9.h,
           ),
+          SizedBox(
+              height: 150,
+              width: 150,
+              child: Image.asset(("assets/images/logo.png"))),
           Align(
             alignment: Alignment.center,
             child: Container(
@@ -167,6 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 5.5.h,
                   width: 88.w,
                   child: TextFormField(
+                    controller: authCtrl.phoneText,
                     keyboardType: TextInputType.phone,
                     style: GoogleFonts.lato(
                         fontSize: 15, fontWeight: FontWeight.w500),
@@ -187,18 +193,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 3.5.h,
-                ),
                 Container(
                   alignment: Alignment.center,
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.check_box,
-                        size: 5.w,
-                        color: Color(0xff704f38),
-                      ),
+                      Checkbox(
+                          value: authCtrl.acceptPrivacy,
+                          onChanged: (value) {
+                            authCtrl.acceptPrivacy = value!;
+
+                            authCtrl.update();
+                          }),
                       Text(
                         " Agree with Terms and Conditions",
                         style: GoogleFonts.lato(
@@ -208,20 +213,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 3.h,
+                  height: 2.h,
                 ),
-                Container(
-                  width: 88.w,
-                  height: 5.h,
-                  margin: EdgeInsets.only(left: 0.5.w),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xff704f38)),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Sign up",
-                    style: GoogleFonts.lato(
-                        fontWeight: FontWeight.w600, color: Color(0xffEDEDED)),
+                InkWell(
+                  onTap: () {
+                    authCtrl.Register();
+                  },
+                  child: Container(
+                    width: 88.w,
+                    height: 5.h,
+                    margin: EdgeInsets.only(left: 0.5.w),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PrimaryColor),
+                    alignment: Alignment.center,
+                    child: (authCtrl.isLoading)
+                        ? LoadingAnimationWidget.staggeredDotsWave(
+                            color: Colors.white, size: 23)
+                        : Text(
+                            "Sign up",
+                            style: GoogleFonts.lato(
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xffEDEDED)),
+                          ),
                   ),
                 ),
                 SizedBox(
@@ -246,7 +260,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     "Sign in",
                     style: GoogleFonts.lato(
                         fontSize: 15,
-                        color: Color(0xff704f38),
+                        color: PrimaryColor,
                         fontWeight: FontWeight.bold),
                   ))
             ],
