@@ -10,6 +10,8 @@ class _HomeScreenViewState extends StatefulWidget {
 class __HomeScreenViewStateState extends State<_HomeScreenViewState> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+    
+    );
   }
 }
