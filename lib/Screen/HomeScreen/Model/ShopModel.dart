@@ -2,7 +2,7 @@ class ShopModel {
   int? id;
   int? shopId;
   String? shopName;
-  List? shopImages;
+  List<ShopImages>? shopImages;
   String? ownerName;
   String? locality;
   String? pinCode;
@@ -15,8 +15,8 @@ class ShopModel {
   String? createdDate;
   String? updatedDate;
   String? shopSlug;
-  String? otherField;
-  List<String>? products;
+  Null? otherField;
+  List<Null>? products;
   int? productsCount;
 
   ShopModel(
@@ -45,7 +45,10 @@ class ShopModel {
     shopId = json['shop_id'];
     shopName = json['shop_name'];
     if (json['shop_images'] != null) {
-      shopImages = json['shop_images'];
+      shopImages = <ShopImages>[];
+      json['shop_images'].forEach((v) {
+        shopImages!.add(new ShopImages.fromJson(v));
+      });
     }
     ownerName = json['owner_name'];
     locality = json['locality'];
@@ -60,7 +63,7 @@ class ShopModel {
     updatedDate = json['updated_date'];
     shopSlug = json['shop_slug'];
     otherField = json['other_field'];
-    products = json['products'].cast<String>();
+
     productsCount = json['products_count'];
   }
 
@@ -85,8 +88,27 @@ class ShopModel {
     data['updated_date'] = this.updatedDate;
     data['shop_slug'] = this.shopSlug;
     data['other_field'] = this.otherField;
-    data['products'] = this.products;
+
     data['products_count'] = this.productsCount;
+    return data;
+  }
+}
+
+class ShopImages {
+  int? id;
+  String? images;
+
+  ShopImages({this.id, this.images});
+
+  ShopImages.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    images = json['images'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['images'] = this.images;
     return data;
   }
 }

@@ -46,7 +46,7 @@ class AuthenticationController extends GetxController {
           "confirm_password": passowrdText.text,
           'device_id': Random().toString()
         });
-    if (request.statusCode == 200 && request.statusCode == 201) {
+    if (request.statusCode == 200 || request.statusCode == 201) {
       var js = json.decode(request.body);
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setString("LOGIN", "IN");

@@ -40,93 +40,102 @@ class AddressListView extends StatelessWidget {
           style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 3.w,
-                  ),
-                  for (var data in proctrl.AddressList)
-                    Container(
-                      height: 10.h,
-                      width: 100.w,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 10),
-                      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 2,
-                              spreadRadius: .2,
-                              offset: Offset(1, 1),
-                              color: const Color.fromRGBO(0, 0, 0, 1)
-                                  .withOpacity(.2))
-                        ],
-                        borderRadius: BorderRadius.circular(12),
-                        //  border: Border.all()
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${data.houseName}",
-                            style: GoogleFonts.poppins(
-                                fontSize: 14, fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            "${data.area}",
-                            style: GoogleFonts.poppins(
-                                fontSize: 12, fontWeight: FontWeight.w400),
-                          ),
-                          Text(
-                            data.city! +
-                                " - " +
-                                data.district! +
-                                ", " +
-                                data.state! +
-                                " " +
-                                data.pincode!,
-                            style: GoogleFonts.poppins(
-                                fontSize: 12, fontWeight: FontWeight.w400),
-                          )
-                        ],
-                      ),
+      body: GetBuilder<ProfileController>(builder: (_) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 3.w,
                     ),
-                ],
+                    for (var data in proctrl.AddressList)
+                      Container(
+                        height: 10.h,
+                        width: 100.w,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5.w, vertical: 10),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 2,
+                                spreadRadius: .2,
+                                offset: Offset(1, 1),
+                                color: const Color.fromRGBO(0, 0, 0, 1)
+                                    .withOpacity(.2))
+                          ],
+                          borderRadius: BorderRadius.circular(12),
+                          //  border: Border.all()
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${data.houseName}",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 14, fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "${data.area}",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 12, fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              data.city! +
+                                  " - " +
+                                  data.district! +
+                                  ", " +
+                                  data.state! +
+                                  " " +
+                                  data.pincode!,
+                              style: GoogleFonts.poppins(
+                                  fontSize: 12, fontWeight: FontWeight.w400),
+                            )
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
-          ),
-          InkWell(
-            onTap: () {
-              addAddresss(context, proctrl);
-            },
-            child: Container(
-              width: 88.w,
-              height: 6.h,
-              margin: EdgeInsets.only(left: 0.5.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: PrimaryColor),
+            Align(
               alignment: Alignment.center,
-              child: (!true)
-                  ? LoadingAnimationWidget.staggeredDotsWave(
-                      color: Colors.white, size: 23)
-                  : Text(
-                      "Add Address",
-                      style: GoogleFonts.lato(
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xffEDEDED)),
-                    ),
+              child: InkWell(
+                onTap: () {
+                  addAddresss(context, proctrl);
+                },
+                child: Container(
+                  width: 88.w,
+                  height: 6.h,
+                  margin: EdgeInsets.only(left: 0.5.w),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: PrimaryColor),
+                  alignment: Alignment.center,
+                  child: (!true)
+                      ? LoadingAnimationWidget.staggeredDotsWave(
+                          color: Colors.white, size: 23)
+                      : Text(
+                          "Add Address",
+                          style: GoogleFonts.lato(
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xffEDEDED)),
+                        ),
+                ),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 4.w,
-          )
-        ],
-      ),
+            SizedBox(
+              height: 4.w,
+            )
+          ],
+        );
+      }),
     );
   }
 }
@@ -137,6 +146,8 @@ addAddresss(BuildContext context, ProfileController pctrl) {
   TextEditingController city = TextEditingController();
   TextEditingController district = TextEditingController();
   TextEditingController state = TextEditingController();
+  state.text = "kerala";
+  district.text = "Eranakulam";
   TextEditingController pincode = TextEditingController();
   TextEditingController postoffice = TextEditingController();
   bool loading = false;
@@ -166,12 +177,13 @@ addAddresss(BuildContext context, ProfileController pctrl) {
                   padding: MediaQuery.of(context).viewInsets,
                   child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
                           height: 20,
                         ),
                         Text(
-                          "Address Password",
+                          "Add Address ",
                           style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w500,
                               fontSize: 13.sp,
@@ -244,8 +256,10 @@ addAddresss(BuildContext context, ProfileController pctrl) {
                                   "postoffice": postoffice.text,
                                   "pincode": pincode.text
                                 });
-
-                            if (Response.statusCode == 200) {
+                            print(Response.body);
+                            print(Response.statusCode);
+                            if (Response.statusCode == 200 ||
+                                Response.statusCode == 201) {
                               Navigator.pop(context);
                               Fluttertoast.showToast(
                                   msg: "Address added successfully");
@@ -254,7 +268,7 @@ addAddresss(BuildContext context, ProfileController pctrl) {
                               Fluttertoast.showToast(
                                   msg: "Something went wrong");
                               st(() {
-                                loading = true;
+                                loading = false;
                               });
                             }
                           },

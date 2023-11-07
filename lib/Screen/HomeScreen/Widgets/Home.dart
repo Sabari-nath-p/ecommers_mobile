@@ -3,6 +3,7 @@ import 'package:ecommerce_mobile/Screen/HomeScreen/Services/Controller.dart';
 import 'package:ecommerce_mobile/Screen/HomeScreen/Widgets/HMpopularProductView.dart';
 import 'package:ecommerce_mobile/Screen/HomeScreen/Widgets/HmCategoryview.dart';
 import 'package:ecommerce_mobile/Screen/HomeScreen/Widgets/HmPopularShop.dart';
+import 'package:ecommerce_mobile/Screen/HomeScreen/Widgets/SearchView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:get/get.dart';
@@ -33,9 +34,16 @@ class HomeScreenVIew extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Container(
                     width: 90.w,
-                    child: TextFormField(
+                    child: TextField(
                       keyboardType: TextInputType.emailAddress,
                       textAlignVertical: TextAlignVertical.center,
+                      onSubmitted: (Value) {
+                        hCtrl.SearchText(Value);
+                        Get.to(
+                          () => SearchViewScreen(),
+                          transition: Transition.downToUp,
+                        );
+                      },
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.search),
                         hintText: ("Search your product"),

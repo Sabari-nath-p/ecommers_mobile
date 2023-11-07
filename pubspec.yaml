@@ -45,6 +45,8 @@ dependencies:
   icons_plus: ^4.0.0
   flutter_carousel_widget: ^2.1.2
   dio: ^5.3.3
+  readmore: ^2.2.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ecommerce_mobile/Constants/Colors.dart';
 import 'package:ecommerce_mobile/Screen/Authentication/AuthenticationMain.dart';
+import 'package:ecommerce_mobile/Screen/Order/OrderScreenMain.dart';
 import 'package:ecommerce_mobile/Screen/Profile/Views/AddressListView.dart';
 import 'package:ecommerce_mobile/main.dart';
 import 'package:flutter/material.dart';
@@ -52,35 +53,43 @@ class ProfileView extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          padding: EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-              border: Border(
-            bottom: BorderSide(color: Colors.black12),
-          )),
-          child: Row(
-            children: [
-              Icon(
-                Iconsax.receipt_item,
-                color: PrimaryColor,
-                size: 25,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Text(
-                  "My Order",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12.sp,
-                      color: AppBlack),
+        InkWell(
+          onTap: () {
+            Get.to(() => OrderMainScreen(),
+                transition: Transition.rightToLeft,
+                duration: Duration(milliseconds: 700));
+          },
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+                border: Border(
+              bottom: BorderSide(color: Colors.black12),
+            )),
+            child: Row(
+              children: [
+                Icon(
+                  Iconsax.receipt_item,
+                  color: PrimaryColor,
+                  size: 25,
                 ),
-              ),
-              RotatedBox(
-                  quarterTurns: 2, child: Icon(Icons.arrow_back_ios_outlined)),
-            ],
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                    "My Order",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.sp,
+                        color: AppBlack),
+                  ),
+                ),
+                RotatedBox(
+                    quarterTurns: 2,
+                    child: Icon(Icons.arrow_back_ios_outlined)),
+              ],
+            ),
           ),
         ),
         InkWell(

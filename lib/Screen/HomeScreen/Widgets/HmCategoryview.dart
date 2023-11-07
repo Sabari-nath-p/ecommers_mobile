@@ -1,3 +1,4 @@
+import 'package:ecommerce_mobile/Screen/HomeScreen/Widgets/SearchView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -48,42 +49,51 @@ class HMCategoryView extends StatelessWidget {
           child: Row(
             children: [
               for (var data in hCtrl.CategoryModelList)
-                if (data.isPopular! && data.isActive!)
-                  Container(
-                    width: 25.w,
-                    height: 12.h,
-                    margin: EdgeInsets.symmetric(horizontal: 4),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: PrimaryColor.withOpacity(.2)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 7.h,
-                          width: 7.h,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: (data.categoryImages!.isNotEmpty)
-                                ? Image.network(
-                                    data.categoryImages!.first.images!,
-                                  )
-                                : Image.network(
-                                    "https://e7.pngegg.com/pngimages/780/540/png-clipart-organic-food-meat-slicer-mandoline-peeler-fresh-fruits-and-vegetables-natural-foods-leaf-vegetable.png",
-                                    fit: BoxFit.fill,
-                                  ),
+                if (data.isActive!)
+                  InkWell(
+                    onTap: () {
+                      hCtrl.searchCategory(data.categoryName!);
+                      Get.to(
+                        () => SearchViewScreen(),
+                        transition: Transition.downToUp,
+                      );
+                    },
+                    child: Container(
+                      width: 25.w,
+                      height: 12.h,
+                      margin: EdgeInsets.symmetric(horizontal: 4),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: PrimaryColor.withOpacity(.2)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 7.h,
+                            width: 7.h,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: (data.categoryImages!.isNotEmpty)
+                                  ? Image.network(
+                                      data.categoryImages!.first.images!,
+                                    )
+                                  : Image.network(
+                                      "https://e7.pngegg.com/pngimages/780/540/png-clipart-organic-food-meat-slicer-mandoline-peeler-fresh-fruits-and-vegetables-natural-foods-leaf-vegetable.png",
+                                      fit: BoxFit.fill,
+                                    ),
+                            ),
                           ),
-                        ),
-                        Text(
-                          data.categoryName!,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff1f2029)),
-                        )
-                      ],
+                          Text(
+                            data.categoryName!,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontSize: 10.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff1f2029)),
+                          )
+                        ],
+                      ),
                     ),
                   ),
             ],

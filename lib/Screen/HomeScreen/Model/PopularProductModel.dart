@@ -1,8 +1,30 @@
-class ProductModel {
+class PopularProductModel {
+  int? id;
+  Product? product;
+
+  PopularProductModel({this.id, this.product});
+
+  PopularProductModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    product =
+        json['product'] != null ? new Product.fromJson(json['product']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.product != null) {
+      data['product'] = this.product!.toJson();
+    }
+    return data;
+  }
+}
+
+class Product {
   int? productId;
   List<int>? category;
   String? shop;
-  Null? brand;
+  String? brand;
   String? productName;
   List<ProductImages>? productImages;
   String? actualPrice;
@@ -18,9 +40,9 @@ class ProductModel {
   String? updatedDate;
   bool? outOfStock;
   String? productSlug;
-  Null? otherField;
+  String? otherField;
 
-  ProductModel(
+  Product(
       {this.productId,
       this.category,
       this.shop,
@@ -42,7 +64,7 @@ class ProductModel {
       this.productSlug,
       this.otherField});
 
-  ProductModel.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'];
     category = json['category'].cast<int>();
     shop = json['shop'];
